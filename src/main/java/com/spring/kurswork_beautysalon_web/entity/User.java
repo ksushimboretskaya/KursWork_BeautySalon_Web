@@ -46,6 +46,18 @@ public class User implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<Role> roles;
 
+    public User() {
+    }
+
+    public User(Long id, String fullName, String email, String login, String password, Boolean active) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.active = active;
+    }
+
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<BookedRecords> bookedRecords;

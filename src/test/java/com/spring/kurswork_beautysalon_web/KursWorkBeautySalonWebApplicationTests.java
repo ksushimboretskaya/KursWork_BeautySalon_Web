@@ -31,7 +31,6 @@ class KursWorkBeautySalonWebApplicationTests {
         Assertions.assertNotEquals(employee1, employee);
     }
 
-
     @Test
     @Description("Добавляем два разных объекта типа \"Services\".")
     public void testAddServices() {
@@ -64,7 +63,7 @@ class KursWorkBeautySalonWebApplicationTests {
 
     @Test
     @Description("Добавляем два разных объекта типа \"FreeRecords\".")
-    public void testtAddFreeREcords() {
+    public void testAddFreeRecords() {
         FreeRecords freeRecords = new FreeRecords();
         freeRecords.setId(3L);
         FreeRecords freeRecords1 = new FreeRecords();
