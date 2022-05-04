@@ -33,7 +33,8 @@ public class UsersApiAdminController {
     }
 
     @PutMapping()
-    public @ResponseBody Object addUser(HttpServletResponse response, @RequestBody User user) {
+    public @ResponseBody
+    Object addUser(HttpServletResponse response, @RequestBody User user) {
         var newUser = new User();
         newUser.setActive(user.getActive());
         newUser.setEmail(user.getEmail());
@@ -52,7 +53,8 @@ public class UsersApiAdminController {
     }
 
     @GetMapping("{id}")
-    public @ResponseBody Object getUser(HttpServletResponse response, @PathVariable Long id) {
+    public @ResponseBody
+    Object getUser(HttpServletResponse response, @PathVariable Long id) {
         var user = userRepository.findById(id);
         if (user.isPresent()) {
             return user.get();
@@ -94,7 +96,8 @@ public class UsersApiAdminController {
     }
 
     @DeleteMapping("{id}")
-    public @ResponseBody Object removeUser(HttpServletResponse response, @PathVariable Long id) {
+    public @ResponseBody
+    Object removeUser(HttpServletResponse response, @PathVariable Long id) {
         var user = userRepository.findById(id);
         if (user.isPresent()) {
             userRepository.delete(user.get());

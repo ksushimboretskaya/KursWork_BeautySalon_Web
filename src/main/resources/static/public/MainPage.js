@@ -22,34 +22,41 @@ function searchRecords() {
         type: "GET",
         success: function (data) {
             for (var t in data) {
+                if (data[t].freeRecords === undefined) {
+                    $('#ErrorInfo').text("Поиск невозможен на дату в прошлом!").show().delay(5000).fadeOut();
+                } else {
+                    html += "            <article class=\"card\">\n" +
+                        "                <section class=\"date\">\n" +
+                        "                    <time datetime=\"23th feb\">\n" +
+                        "                        <span>Запись</span>\n" +
+                        "                        <span> <i class=\"fas fa-ruble-sign\"></i> " + data[t].freeRecords[t].employee.services.servicesPrice + "</span>\n" +
+                        "                        <button onclick='buy(" + data[t].freeRecords[t].id + ")'" +
+                        " type=\"button\" class=\"btn btn-success\"><i class=\"fas fa-shopping-cart\"></i> Записаться</button>\n" +
+                        "                    </time>\n" +
+                        "                </section>\n" +
+                        "                <section class=\"card-cont\">\n";
 
-                html += "            <article class=\"card\">\n" +
-                    "                <section class=\"date\">\n" +
-                    "                    <time datetime=\"23th feb\">\n" +
-                    "                        <span>Запись</span>\n" +
-                    "                        <span> <i class=\"fas fa-ruble-sign\"></i> " + data[t].freeRecords[t].employee.services.servicesPrice + "</span>\n" +
-                    "                        <button onclick='buy(" + data[t].freeRecords[t].id + ")'" +
-                    " type=\"button\" class=\"btn btn-success\"><i class=\"fas fa-shopping-cart\"></i> Записаться</button>\n" +
-                    "                    </time>\n" +
-                    "                </section>\n" +
-                    "                <section class=\"card-cont\">\n";
-
-                html += "<small>Услуга</small>\n" +
-                    "<h2><i class=\"fas fa-grin-hearts\" style=\"padding-right: 5px\"></i>"
-                    + data[t].freeRecords[t].employee.services.servicesName + "</h2>";
-                html += "<small>Мастер</small>\n" +
-                    "<h2><i class=\"fas fa-grin-hearts\" style=\"padding-right: 5px\"></i>"
-                    + data[t].freeRecords[t].employee.fullName + "</h2>";
-                html += "                    </section>\n" +
-                    "            </article><br><br>";
-
+                    html += "<small>Услуга</small>\n" +
+                        "<h2><i class=\"fas fa-grin-hearts\" style=\"padding-right: 5px\"></i>"
+                        + data[t].freeRecords[t].employee.services.servicesName + "</h2>";
+                    html += "<small>Мастер</small>\n" +
+                        "<h2><i class=\"fas fa-grin-hearts\" style=\"padding-right: 5px\"></i>"
+                        + data[t].freeRecords[t].employee.fullName + "</h2>";
+                    html += "                    </section>\n" +
+                        "            </article><br><br>";
+                }
             }
-            $('#recordsMain').html(html).show();
-            if (data.length === 0) {
-                $('#successInfo').text("Свободных окошек нет =(").show().delay(5000).fadeOut();
-            } else {
-                $('#successInfo').text("Свободные окошки найдены!").show().delay(5000).fadeOut();
-            }
+                $('#recordsMain').html(html).show();
+                console.log("data", data);
+                if (data[0] === undefined) {
+                    $('#successInfo').text("Свободных окошек нет =(").show().delay(5000).fadeOut();
+                }
+                else if(data.error_code === 400) {
+                    $('#successInfo').text("Попробуйте новый поиск =(").show().delay(5000).fadeOut();
+                }else {
+                    $('#successInfo').text("Свободные окошки найдены!").show().delay(5000).fadeOut();
+                }
+
         },
         error: function (data) {
             $('#ErrorInfo').text("Ошибка. Проверьте, указали ли вы все поля?").show().delay(5000).fadeOut();

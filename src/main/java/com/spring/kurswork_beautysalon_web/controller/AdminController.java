@@ -29,7 +29,7 @@ public class AdminController {
     @GetMapping
     public String adminPage(Model model) {
         var services = servicesRepository.count();
-        var bookedRecords  = bookedRecordsRepository.count();
+        var bookedRecords = bookedRecordsRepository.count();
         var employee = employeeRepository.count();
         var freeRecords = freeRecordsRepository.count();
         var roles = roleRepository.count();

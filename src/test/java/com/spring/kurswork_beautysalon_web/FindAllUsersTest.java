@@ -28,6 +28,5 @@ public class FindAllUsersTest {
         List<User> usersListFromDataBase = userRepository.findAll();
         Assertions.assertNotNull(usersListFromDataBase);
         Assertions.assertNotEquals(usersList, usersListFromDataBase);
-
     }
 }

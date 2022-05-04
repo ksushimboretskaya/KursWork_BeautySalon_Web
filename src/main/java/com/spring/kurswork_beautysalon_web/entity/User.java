@@ -128,8 +128,8 @@ public class User implements UserDetails {
     }
 
     public boolean isAdmin() {
-        for (var role : roles){
-            if (role.getName().equals("ADMIN")){
+        for (var role : roles) {
+            if (role.getName().equals("ADMIN")) {
                 return true;
             }
         }

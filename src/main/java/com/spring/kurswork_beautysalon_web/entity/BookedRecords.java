@@ -11,11 +11,11 @@ public class BookedRecords {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "record_id",nullable = false)
+    @JoinColumn(name = "record_id", nullable = false)
     private FreeRecords freeRecords;
 
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public BookedRecords() {

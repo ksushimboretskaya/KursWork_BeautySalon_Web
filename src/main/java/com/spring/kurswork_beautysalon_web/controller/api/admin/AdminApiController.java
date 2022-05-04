@@ -25,7 +25,8 @@ public class AdminApiController {
     private FreeRecordsRepository freeRecordsRepository;
 
     @GetMapping("info")
-    public @ResponseBody AdminInfo getInfo() {
+    public @ResponseBody
+    AdminInfo getInfo() {
         var services = servicesRepository.count();
         var employee = employeeRepository.count();
         var bookedRecords = bookedRecordsRepository.count();
