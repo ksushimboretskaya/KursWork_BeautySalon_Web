@@ -10,7 +10,8 @@
                     <h4 class="text-uppercase">Основная статистика.</h4>
                     <p>Статистика в наглядных карточках.</p>
                     <button type="button" class="btn btn-success" onclick="getGeneralInfo();"><i class="fas fa-sync-alt"></i></button>
-                    <@modal.updatePanel "стран"></@modal.updatePanel>
+                    <button type="button" class="btn btn-success" onclick="drawChart();"><i class="fas fa-sync-alt"></i></button>
+                    <@modal.updatePanel ""></@modal.updatePanel>
                     <div class="alert alert-success" role="alert" id="successInfo" style="display: none"></div>
                     <div class="alert alert-success" role="alert" id="ErrorInfo" style="display: none"></div>
                 </div>
@@ -50,23 +51,6 @@
                         </div>
                     </div>
                 </div>
-<#--                <div class="col-xl-3 col-sm-6 col-12">-->
-<#--                    <div class="card">-->
-<#--                        <div class="card-content">-->
-<#--                            <div class="card-body">-->
-<#--                                <div class="media d-flex">-->
-<#--                                    <div class="align-self-center">-->
-<#--                                        <i class="fas fa-building success font-large-2 float-left"></i>-->
-<#--                                    </div>-->
-<#--                                    <div class="media-body text-right">-->
-<#--                                        <h3 id="airlines">${info.airlines}</h3>-->
-<#--                                        <span>Авиакомпаний</span>-->
-<#--                                    </div>-->
-<#--                                </div>-->
-<#--                            </div>-->
-<#--                        </div>-->
-<#--                    </div>-->
-<#--                </div>-->
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
@@ -85,25 +69,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
-<#--                <div class="col-xl-3 col-sm-6 col-12">-->
-<#--                    <div class="card">-->
-<#--                        <div class="card-content">-->
-<#--                            <div class="card-body">-->
-<#--                                <div class="media d-flex">-->
-<#--                                    <div class="media-body text-left">-->
-<#--                                        <h3 class="danger" id="luggage">${info.luggage}</h3>-->
-<#--                                        <span>Видов багажа</span>-->
-<#--                                    </div>-->
-<#--                                    <div class="align-self-center">-->
-<#--                                        <i class="fas fa-suitcase-rolling danger font-large-2 float-right"></i>-->
-<#--                                    </div>-->
-<#--                                </div>-->
-<#--                            </div>-->
-<#--                        </div>-->
-<#--                    </div>-->
-<#--                </div>-->
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card">
                         <div class="card-content">
@@ -157,26 +123,40 @@
                     </div>
                 </div>
             </div>
-<#--            <div class="row">-->
-<#--                <div class="col-xl-3 col-sm-6 col-12">-->
-<#--                    <div class="card">-->
-<#--                        <div class="card-content">-->
-<#--                            <div class="card-body">-->
-<#--                                <div class="media d-flex">-->
-<#--                                    <div class="align-self-center">-->
-<#--                                        <i class="fas fa-plane-arrival primary font-large-2 float-left"></i>-->
-<#--                                    </div>-->
-<#--                                    <div class="media-body text-right">-->
-<#--                                        <h3 id="airports">${info.airports}</h3>-->
-<#--                                        <span>Аэропортов</span>-->
-<#--                                    </div>-->
-<#--                                </div>-->
-<#--                            </div>-->
-<#--                        </div>-->
-<#--                    </div>-->
-<#--                </div>-->
-<#--            </div>-->
         </section>
     </div>
+
     <script src="adminPanel.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        // Load the Visualization API and the piechart package.
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Roles');
+            data.addColumn('number', 'Count');
+            data.addRows([
+                ['ADMIN', 1],
+                ['USER', 2]
+            ]);
+
+            // Set chart options
+            var options = {'width':400,
+                'height':300};
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+    <body>
+    <div id="chart_div" style="width: 300px; height:400px"></div>
+    </body>
 </@page.page>

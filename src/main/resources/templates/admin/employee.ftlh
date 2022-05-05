@@ -87,6 +87,9 @@
                 </#list>
                 </tbody>
             </table>
+            <form>
+            <p> <input formaction="/getExcel" type = "submit" value = "Submit"> </p>
+            </form>
         </div>
     </div>
     <script src="../adminPanel.js"></script>

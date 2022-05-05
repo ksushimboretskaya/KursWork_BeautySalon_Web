@@ -4,6 +4,26 @@ $(function () {
     //getGeneralInfo();
 });
 
+function getGraph() {
+    const config = {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Pie Chart'
+                }
+            }
+        },
+    };
+
+}
+
 function getGeneralInfo() {
     var url = 'http://localhost:8080/api/admin/info';
     $('#services').text("Загрузка..");
@@ -37,7 +57,6 @@ function getGeneralInfo() {
 function getUsers() {
     $('#UsersList').text("")
     $('#tableLoad').show();
-    //$('#UsersList').text("Куку");
     var url = 'http://localhost:8080/api/admin/users';
     var table = "<tr>"
     $.ajax({
